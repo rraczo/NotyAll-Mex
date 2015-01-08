@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+        
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/titulo1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/resumen1"
+            android:paddingLeft="5dip"
+            android:text="@string/titulo"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/resumen1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titulo1"
+            android:layout_toRightOf="@+id/imagen1"
+            android:paddingLeft="5dp"
+            android:text="@string/textoresumen"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+        
+        <TextView
+            android:id="@+id/link1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_below="@id/resumen1"
+            android:text="@string/link"
+            android:textColor="#8B8C8D" />
+
+        <ImageView
+            android:id="@+id/imagen1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/resumen1"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_launcher"
+            android:maxWidth="70dp"
+            android:maxHeight="70dp"
+            android:layout_centerVertical="true" />
+
+</RelativeLayout>

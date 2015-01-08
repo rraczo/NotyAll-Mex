@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">NotyAll-Mex</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_cronica">Cronica</string>
+    <string name="title_activity_not_ciudad">NotCiudad</string>
+    <string name="title_activity_cronica__not_nac">Cronica_NotNac</string>
+    <string name="title_activity_cronica__not_rel">Cronica_NotRel</string>
+    <string name="titulo">Titulo de Noticia de Prueba</string>
+    <string name="fecha">"Dia" de "Mes" de "Año"</string>
+    <string name="textoresumen">Esto es un ejemplo de resumen de la nota, Esto es un ejemplo de resumen de la nota,Esto es un ejemplo de resumen de la nota,Esto es un ejemplo de resumen de la nota</string>
+    <string name="link">www.paginadeprueba.com</string>
+    <string name="share">Compartir</string>
+    <string name="title_activity_list_item_image">List_item_image</string>
+    <string name="title_activity_excelsior">Excelsior</string>
+    <string name="title_activity_excelsior_not_rel">Excelsior NotRel</string>
+    <string name="title_activity_imagen_comp">Cronica_ImagenComp</string>
+    <string name="button_update">Actualización</string>
+    <string name="title_activity_load__noticieros">Load_Noticieros</string>
+    <string name="title_activity_carga_secciones">Carga_secciones</string>
+    <string name="title_activity_carga_notas_seccion">Carga_notas_seccion</string>
+    <string name="title_activity_carga_nota_completa">Carga_nota_completa</string>
+
+</resources>

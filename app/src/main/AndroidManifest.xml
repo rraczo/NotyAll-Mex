@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.notiallmx.notyall_mex.app" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
+        <activity
+            android:name=".Principal"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Cronica"
+            android:label="@string/title_activity_cronica" >
+        </activity>
+        <activity
+            android:name=".Cronica_NotComp"
+            android:label="@string/title_activity_cronica__not_nac" >
+        </activity>
+        <activity
+            android:name=".Cronica_NotRel"
+            android:label="@string/title_activity_cronica__not_rel" >
+        </activity>
+        <activity
+            android:name=".Excelsior"
+            android:label="@string/title_activity_excelsior" >
+        </activity>
+        <activity
+            android:name=".Excelsior_NotRel"
+            android:label="@string/title_activity_excelsior_not_rel" >
+        </activity>
+        <activity
+            android:name=".Cronica_ImagenComp"
+            android:label="@string/title_activity_imagen_comp" >
+        </activity>
+        <activity
+            android:name=".Load_Noticieros"
+            android:label="@string/title_activity_load__noticieros" >
+        </activity>
+        <activity
+            android:name=".Carga_secciones"
+            android:label="@string/title_activity_carga_secciones" >
+        </activity>
+        <activity
+            android:name=".Carga_notas_seccion"
+            android:label="@string/title_activity_carga_notas_seccion" >
+        </activity>
+        <activity
+            android:name=".Carga_nota_completa"
+            android:label="@string/title_activity_carga_nota_completa" >
+        </activity>
+    </application>
+
+</manifest>
