@@ -82,7 +82,7 @@ public class Principal extends Activity {
             try {
                 ultima_version =new Version(Principal.this,"test").execute().get();
 
-                Log.i("fecha de ersion actual",ultima_version);
+                Log.i("fecha de Version actual",ultima_version);
                 version_actual = formatter.parse(ultima_version);
             } catch (InterruptedException e) {
                 e.printStackTrace();

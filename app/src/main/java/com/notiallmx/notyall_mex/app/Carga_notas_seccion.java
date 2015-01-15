@@ -26,10 +26,9 @@ public class Carga_notas_seccion extends ActionBarActivity {
     JSONObject _GRAMATIC=null;
     private List<item_Noticia> listaNot = new ArrayList<item_Noticia>();
     JSONObject evobject;
-    private ProgressDialog progressDialog;
 
     private ListView listnotas ;
-
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,7 @@ public class Carga_notas_seccion extends ActionBarActivity {
     }
     class Cargar_resumen_nota extends AsyncTask<Void, Void, String> {
         private Activity context;
-        //private ProgressDialog progressDialog;
+
         Cargar_resumen_nota(Activity context, String test) {
             this.context = context;
         }
@@ -57,24 +56,22 @@ public class Carga_notas_seccion extends ActionBarActivity {
             // TODO Auto-generated method stub
             super.onPreExecute();
             progressDialog = new ProgressDialog(context);
-            progressDialog.setMessage("Actualizando, espere por favor...");
             progressDialog.setIndeterminate(true);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setMessage("Contacting server. Please wait...");
+            progressDialog.setCancelable(false);
             progressDialog.show();
             //aqui el pedo
         }
-
         @Override
         protected String doInBackground(Void... arg0) {
             String response=null;
             listnotas = (ListView) findViewById(R.id.lista_notas_seccion);
-
-
             //cargamos la configuracion
             SharedPreferences prefs = getSharedPreferences("ConfiguracionNotyAll", Activity.MODE_PRIVATE);
             final String gramaticas=prefs.getString("Gramaticas","");
             Log.e("Sacando Gramaticas", gramaticas);
             JSONObject gramaticaCorrecta_tmp = null;
-
             try {
                 JSONArray arreglo_gramaticas = new JSONArray(gramaticas);
                 for (int i = 0; i < arreglo_gramaticas.length(); i++) {
@@ -85,73 +82,36 @@ public class Carga_notas_seccion extends ActionBarActivity {
                         gramaticaCorrecta_tmp=evobject;
                         _GRAMATIC=evobject;                    }
                 }
-                damenotas(gramaticaCorrecta_tmp);
-
+                //damenotas(gramaticaCorrecta_tmp);
+                String link = _LINK;
+                listaNot=procesosjsoup.SacaNotasResumen(link,gramaticaCorrecta_tmp);//procesamos pagina
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
             return response;
         }
-
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             progressDialog.dismiss();
+            final ListView lv = (ListView)findViewById(R.id.lista_notas_seccion);//cargamos el listview
+
+            lv.setAdapter(dameAdaptador());//ponemos adaptador a la lista
+            Log.e("Realizamos adaptador","Completo");
+
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
+                    Intent intent = new Intent(Carga_notas_seccion.this, Carga_nota_completa.class);
+                    intent.putExtra("_LINK", listaNot.get(position).getLink());
+                    intent.putExtra("_TITULO", listaNot.get(position).getTitulo());
+                    intent.putExtra("_GRAMATIC", _GRAMATIC.toString());
+
+                    startActivity(intent);}});
         }
-    }
-
-    protected void damenotas(final JSONObject gramaticaCorrecta) {
-        new Thread() {
-            public void run() {//corremos hilo
-                String link = _LINK;
-                Log.i("Entramos en metodo damenotas con link",link);
-                listaNot=procesosjsoup.SacaNotasResumen(link,gramaticaCorrecta);//procesamos pagina
-                runOnUiThread(new Runnable() {//cargamos interface aunque no halla terminado peticiones http
-                    public void run() {//cuando termine de procesar el html
-                        final ListView lv = (ListView)findViewById(R.id.lista_notas_seccion);//cargamos el listview
-
-                        lv.setAdapter(dameAdaptador());//ponemos adaptador a la lista
-                        Log.e("Realizamos adaptador","Completo");
-
-                        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
-                                Intent intent = new Intent(Carga_notas_seccion.this, Carga_nota_completa.class);
-                                intent.putExtra("_LINK", listaNot.get(position).getLink());
-                                intent.putExtra("_TITULO", listaNot.get(position).getTitulo());
-                                intent.putExtra("_GRAMATIC", _GRAMATIC.toString());
-
-                                startActivity(intent);
-                                // Log.i("Iniciando actividad","Iniciando actividad");
-                            }
-                        });
-                    }
-                });
-            }
-
-        }.start();
     }
 
     public ItemGenralAdapter dameAdaptador(){
         ItemGenralAdapter adapter = new ItemGenralAdapter(this, (ArrayList<item_Noticia>) listaNot);
         return adapter;
     }
-/*    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.carga_notas_seccion, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
 }

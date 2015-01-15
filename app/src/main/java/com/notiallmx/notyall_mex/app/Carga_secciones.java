@@ -21,7 +21,6 @@ import java.util.ArrayList;
 public class Carga_secciones extends ActionBarActivity {
     String _NOMBRE="";
      int _INDICE=0;
-
     private ListView listSecciones ;
     ArrayList<Seccion> availableSecciones;
     private Seccion_Adapter secAdapter;
@@ -34,10 +33,7 @@ public class Carga_secciones extends ActionBarActivity {
         _NOMBRE=bundle.getString("_NOMBRE");//sacamos variables
         _INDICE=bundle.getInt("_INDICE");//sacamos variables
         setTitle(_NOMBRE);
-
         new Cargar_secciones(this,"test").execute();
-
-
     }
 
     class Cargar_secciones extends AsyncTask<Void, Void, String> {
