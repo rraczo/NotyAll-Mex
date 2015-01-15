@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.notiallmx.notyall_mex.app.adapters.Seccion_Adapter;
+import com.notiallmx.notyall_mex.app.grammars.Seccion;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

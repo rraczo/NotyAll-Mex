@@ -9,6 +9,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
+import com.notiallmx.notyall_mex.app.objects.item_Noticia;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -4,8 +4,16 @@ package com.notiallmx.notyall_mex.app;
  * Created by lord and pispi on 20/06/2014.
  */
 
-import java.util.ArrayList;
-import java.util.List;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.util.Log;
+
+import com.notiallmx.notyall_mex.app.grammars.Completa;
+import com.notiallmx.notyall_mex.app.grammars.Dominio;
+import com.notiallmx.notyall_mex.app.grammars.Gramatica;
+import com.notiallmx.notyall_mex.app.grammars.Seccion;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -18,81 +26,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
-
-import android.content.SharedPreferences;
-
-import android.os.AsyncTask;
-import android.util.Log;
-
-class Dominio{
-    int id;
-    String name;
-    String url;
-        Dominio(int id, String url, String name){
-            this.id=id;
-            this.url=url;
-            this.name=name;
-        }
-}
-
-class Seccion{
-    int id;
-    int id_dominio;
-    String name;
-    String url;
-
-    Seccion(int id, int id_dominio,String url, String name){
-        this.id=id;
-        this.id_dominio=id_dominio;
-        this.url=url;
-        this.name=name;
-    }
-}
-
-class Gramatica{
-    int id;
-    int id_seccion;
-    String selector;
-    String elemento;
-    String titulo;
-    String fecha;
-    String link;
-    String parrafo;
-
-    Gramatica(int id, int id_seccion, String selector, String elemento, String titulo,String fecha,String link,String parrafo ){
-        this.id=id;
-        this.id_seccion=id_seccion;
-        this.selector=selector;
-        this.elemento=elemento;
-        this.titulo=titulo;
-        this.fecha=fecha;
-        this.link=link;
-        this.parrafo=parrafo;
-    }
-}
-class Completa {
-    int id;
-    int id_gramatica;
-    String elemento;
-    String titulo;
-    String fecha;
-    String link;
-    String image;
-    String parrafo;
-
-    Completa(int id, int id_gramatica, String elemento,String titulo,String fecha,String link,String image,String parrafo ){
-        this.id=id;
-        this.id_gramatica=id_gramatica;
-        this.elemento=elemento;
-        this.titulo=titulo;
-        this.fecha=fecha;
-        this.link=link;
-        this.image=image;
-        this.parrafo=parrafo;
-    }
-}
+import java.util.ArrayList;
+import java.util.List;
 
 
 class Gramaticas extends AsyncTask<Void, Void, String> {

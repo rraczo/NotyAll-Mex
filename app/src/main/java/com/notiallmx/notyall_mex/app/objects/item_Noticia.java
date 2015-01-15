@@ -1,4 +1,4 @@
-package com.notiallmx.notyall_mex.app;
+package com.notiallmx.notyall_mex.app.objects;
 
 public class item_Noticia {
 	 protected long id;

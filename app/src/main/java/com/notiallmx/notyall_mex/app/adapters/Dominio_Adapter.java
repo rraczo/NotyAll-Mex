@@ -1,4 +1,4 @@
-package com.notiallmx.notyall_mex.app;
+package com.notiallmx.notyall_mex.app.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,21 +9,22 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.notiallmx.notyall_mex.app.R;
+import com.notiallmx.notyall_mex.app.grammars.Dominio;
+
 import java.util.ArrayList;
 
 /**
  * Created by pispi & lord on 02/07/2014.
  */
-class ViewHolder {
-    TextView categoria_nombre;
-}
 
-public class Seccion_Adapter extends BaseAdapter {
+
+public class Dominio_Adapter extends BaseAdapter {
     protected Activity activity;
-    protected ArrayList<Seccion> items;
+    protected ArrayList<Dominio> items;
     private SharedPreferences prefs;
 
-    public Seccion_Adapter(Activity activity, ArrayList<Seccion> items) {
+    public Dominio_Adapter(Activity activity, ArrayList<Dominio> items) {
         this.activity = activity;
         this.items = items;
     }
@@ -43,7 +44,6 @@ public class Seccion_Adapter extends BaseAdapter {
         return  items.get(position).id;
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -56,10 +56,9 @@ public class Seccion_Adapter extends BaseAdapter {
             viewhold=new ViewHolder();
             viewhold.categoria_nombre=(TextView) vi.findViewById(R.id.titulo);
 
-            Seccion sec = items.get(position);
+            Dominio dom = items.get(position);
 
-
-            viewhold.categoria_nombre.setText(sec.name);
+            viewhold.categoria_nombre.setText(dom.name);
         }
         else{
             viewhold = (ViewHolder)vi.getTag();

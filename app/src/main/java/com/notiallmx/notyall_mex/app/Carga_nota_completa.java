@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -19,6 +18,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
+
+import com.notiallmx.notyall_mex.app.objects.item_Noticia;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
@@ -117,7 +119,7 @@ public class Carga_nota_completa extends Activity {
                         @Override
                         public void onClick(View v) {
                             Log.i("Que shingaos click", "Entered onClick method");
-                            Intent intent = new Intent(Carga_nota_completa.this, Cronica_ImagenComp.class);
+                            Intent intent = new Intent(Carga_nota_completa.this, Carga_ImagenComp.class);
                             intent.putExtra("_IMG", listaNot.get(0).getFoto());
                             startActivity(intent);
                         }

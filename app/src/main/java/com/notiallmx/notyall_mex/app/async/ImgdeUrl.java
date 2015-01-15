@@ -1,4 +1,4 @@
-package com.notiallmx.notyall_mex.app;
+package com.notiallmx.notyall_mex.app.async;
 
 /**
  * Created by oscar on 02/06/2014.
@@ -6,6 +6,8 @@ package com.notiallmx.notyall_mex.app;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.widget.ImageView;
+
+import com.notiallmx.notyall_mex.app.procesosjsoup;
 
 import java.lang.ref.WeakReference;
 

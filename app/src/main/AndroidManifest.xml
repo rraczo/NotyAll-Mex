@@ -19,32 +19,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Cronica"
-            android:label="@string/title_activity_cronica" >
-        </activity>
-        <activity
-            android:name=".Cronica_NotComp"
-            android:label="@string/title_activity_cronica__not_nac" >
-        </activity>
-        <activity
-            android:name=".Cronica_NotRel"
-            android:label="@string/title_activity_cronica__not_rel" >
-        </activity>
-        <activity
-            android:name=".Excelsior"
-            android:label="@string/title_activity_excelsior" >
-        </activity>
-        <activity
-            android:name=".Excelsior_NotRel"
-            android:label="@string/title_activity_excelsior_not_rel" >
-        </activity>
-        <activity
-            android:name=".Cronica_ImagenComp"
+            android:name=".Carga_ImagenComp"
             android:label="@string/title_activity_imagen_comp" >
-        </activity>
-        <activity
-            android:name=".Load_Noticieros"
-            android:label="@string/title_activity_load__noticieros" >
         </activity>
         <activity
             android:name=".Carga_secciones"

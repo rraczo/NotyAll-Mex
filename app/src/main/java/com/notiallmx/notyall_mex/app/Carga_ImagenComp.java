@@ -10,7 +10,7 @@ import android.widget.ImageView;
 /**
  * Created by oscar on 06/06/2014.
  */
-public class Cronica_ImagenComp extends Activity {
+public class Carga_ImagenComp extends Activity {
     String _IMG = "";
 
     @Override

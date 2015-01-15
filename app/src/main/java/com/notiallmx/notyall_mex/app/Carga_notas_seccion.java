@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.notiallmx.notyall_mex.app.adapters.ItemGenralAdapter;
+import com.notiallmx.notyall_mex.app.objects.item_Noticia;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -106,7 +109,9 @@ public class Carga_notas_seccion extends ActionBarActivity {
                     intent.putExtra("_TITULO", listaNot.get(position).getTitulo());
                     intent.putExtra("_GRAMATIC", _GRAMATIC.toString());
 
-                    startActivity(intent);}});
+                    startActivity(intent);
+                }
+            });
         }
     }
 
