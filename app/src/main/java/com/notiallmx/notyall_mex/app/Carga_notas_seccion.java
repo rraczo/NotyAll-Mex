@@ -58,7 +58,7 @@ public class Carga_notas_seccion extends ActionBarActivity {
             progressDialog = new ProgressDialog(context);
             progressDialog.setIndeterminate(true);
             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            progressDialog.setMessage("Contacting server. Please wait...");
+            progressDialog.setMessage("Cargando, espere por favor...");
             progressDialog.setCancelable(false);
             progressDialog.show();
             //aqui el pedo

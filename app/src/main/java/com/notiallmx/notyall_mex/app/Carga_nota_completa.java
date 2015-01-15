@@ -78,7 +78,7 @@ public class Carga_nota_completa extends Activity {
             // TODO Auto-generated method stub
             super.onPreExecute();
             progressDialog = new ProgressDialog(context);
-            progressDialog.setMessage("Actualizando, espere por favor...");
+            progressDialog.setMessage("Cargando, espere por favor...");
             progressDialog.setIndeterminate(true);
             progressDialog.show();
             //aqui el pedo
