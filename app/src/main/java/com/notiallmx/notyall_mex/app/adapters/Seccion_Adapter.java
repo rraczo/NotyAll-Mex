@@ -19,7 +19,9 @@ import java.util.ArrayList;
  */
 
 
-
+class ViewHolder {
+    TextView categoria_nombre;
+}
 public class Seccion_Adapter extends BaseAdapter {
     protected Activity activity;
     protected ArrayList<Seccion> items;
