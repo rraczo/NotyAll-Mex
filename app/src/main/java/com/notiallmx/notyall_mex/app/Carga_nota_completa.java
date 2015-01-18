@@ -9,10 +9,12 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v4.app.NavUtils;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -38,10 +40,13 @@ public class Carga_nota_completa extends Activity {
     private ProgressDialog progressDialog;
     private ListView listnotas ;
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carga_nota_completa);
+
+
         Bundle bundle = getIntent().getExtras();//sacamos variables
         _LINK=bundle.getString("_LINK");//sacamos variables
         _TITULO=bundle.getString("_TITULO");//sacamos variables
@@ -67,6 +72,9 @@ public class Carga_nota_completa extends Activity {
         StrictMode.ThreadPolicy cron=new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(cron);
         new Cargar_nota_completa(this,"test").execute();
+        //activar el boton atras en la actionbar
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     class Cargar_nota_completa extends AsyncTask<Void, Void, String> {
@@ -133,6 +141,7 @@ public class Carga_nota_completa extends Activity {
                             listaNot.get(0).getFecha()+"\n\n"+
                             resumenC.getText()+"\n\n"+
                             _LINK);
+                    //poner en la barra la parte de compartir de api 14 para adelante
                     mShareActionProvider.setShareIntent(getDefaultShareIntent());
                 }
             } catch (Exception e) {
@@ -151,7 +160,18 @@ public class Carga_nota_completa extends Activity {
         mShareActionProvider = (ShareActionProvider) menu.findItem(R.id.menu_item_carga_nota_completa).getActionProvider();
         return super.onCreateOptionsMenu(menu);
     }
-
+    //cuando precionan el boton back del menu superior
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; goto parent activity.
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
     /** Returns a share intent */
     private Intent getDefaultShareIntent(){
         Intent intent = new Intent(Intent.ACTION_SEND);

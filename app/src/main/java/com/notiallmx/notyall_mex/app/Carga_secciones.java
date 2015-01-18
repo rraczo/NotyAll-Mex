@@ -1,13 +1,16 @@
 package com.notiallmx.notyall_mex.app;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -21,13 +24,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Carga_secciones extends ActionBarActivity {
+public class Carga_secciones extends Activity {
     String _NOMBRE="";
      int _INDICE=0;
     private ListView listSecciones ;
     ArrayList<Seccion> availableSecciones;
     private Seccion_Adapter secAdapter;
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +41,8 @@ public class Carga_secciones extends ActionBarActivity {
         _INDICE=bundle.getInt("_INDICE");//sacamos variables
         setTitle(_NOMBRE);
         new Cargar_secciones(this,"test").execute();
+        //activar el boton atras en la actionbar
+        getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     class Cargar_secciones extends AsyncTask<Void, Void, String> {
@@ -114,6 +120,18 @@ public class Carga_secciones extends ActionBarActivity {
 
                 }
             });
+        }
+    }
+    //cuando precionan el boton back del menu superior
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; goto parent activity.
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

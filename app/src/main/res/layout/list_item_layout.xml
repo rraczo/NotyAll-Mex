@@ -13,6 +13,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="5dip"
             android:textSize="17sp"
+            android:textColor="@color/col_tit"
             android:text="@string/titulo"
             android:textAppearance="?android:attr/textAppearanceLarge" />        
         
@@ -22,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/titulo"
-            android:textColor="#DD0101"
+            android:textColor="@color/col_fecha"
             android:paddingLeft="5dp"
             android:text="@string/fecha"
             android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -31,20 +32,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="5dp"
+            android:textColor="@color/col_resumen"
             android:layout_below="@id/fecha"
             android:text="@string/textoresumen"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        
         <TextView
             android:id="@+id/link"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
+            android:textColor="@color/col_link"
             android:layout_below="@id/resumen"
-            android:text="@string/link"
-            android:textColor="#8B8C8D"
-            
-            />
-
+            android:text="@string/link" />
 </RelativeLayout>

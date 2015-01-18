@@ -17,7 +17,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <!-- back butom-->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.notiallmx.notyall_mex.app.Principal" />
         </activity>
+
         <activity
             android:name=".Carga_ImagenComp"
             android:label="@string/title_activity_imagen_comp" >

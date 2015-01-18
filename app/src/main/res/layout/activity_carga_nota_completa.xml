@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="3dip"
             android:text="@string/titulo"
+            android:textColor="@color/col_tit"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="17sp" />
 
@@ -42,7 +43,7 @@
                     android:paddingLeft="3dip"
                     android:text="@string/fecha"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="#DD0101" />
+                    android:textColor="@color/col_fecha" />
 
                 <ImageView
                     android:id="@+id/imagenArti_NotaC"
@@ -58,6 +59,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="3dip"
                     android:text="@string/textoresumen"
+                    android:textColor="@color/col_Ncompleta"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textIsSelectable="true"             />
 
@@ -72,7 +74,7 @@
             android:layout_alignParentBottom="true"
             android:gravity="right"
             android:text="@string/link"
-            android:textColor="#6D84B4"
+            android:textColor="@color/col_link"
             android:textAppearance="?android:attr/textAppearanceSmall" />
     <ImageView
         android:id="@+id/expanded_image"

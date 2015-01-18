@@ -1,13 +1,16 @@
 package com.notiallmx.notyall_mex.app;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -22,7 +25,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Carga_notas_seccion extends ActionBarActivity {
+public class Carga_notas_seccion extends Activity {
     String _NOMBRE="";
     int _INDICE=0;
     String _LINK="";
@@ -33,6 +36,7 @@ public class Carga_notas_seccion extends ActionBarActivity {
     private ListView listnotas ;
     private ProgressDialog progressDialog;
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +51,8 @@ public class Carga_notas_seccion extends ActionBarActivity {
         Log.e("NOMBRE",_INDICE+"--"+_NOMBRE+"--"+_LINK);
 
         new Cargar_resumen_nota(this,"test").execute();
+        //activar el boton atras en la actionbar
+        getActionBar().setDisplayHomeAsUpEnabled(true);
     }
     class Cargar_resumen_nota extends AsyncTask<Void, Void, String> {
         private Activity context;
@@ -112,6 +118,18 @@ public class Carga_notas_seccion extends ActionBarActivity {
                     startActivity(intent);
                 }
             });
+        }
+    }
+    //cuando precionan el boton back del menu superior
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; goto parent activity.
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

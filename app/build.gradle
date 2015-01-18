@@ -22,8 +22,7 @@ android {
 
 dependencies {
     compile files('libs/jsoup-1.7.3.jar')
-    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:19.+'
-    compile 'com.android.support:appcompat-v7:19.+'
-    compile 'com.android.support:appcompat-v7:19.+'
+    compile 'it.sephiroth.android.library.imagezoom:imagezoom:2.1.1'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 }

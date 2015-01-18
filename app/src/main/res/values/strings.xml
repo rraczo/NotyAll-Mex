@@ -23,4 +23,9 @@
     <string name="title_activity_carga_notas_seccion">Carga_notas_seccion</string>
     <string name="title_activity_carga_nota_completa">Carga_nota_completa</string>
 
+    <color name="col_tit">#000</color>
+    <color name="col_resumen">#ff404040</color>
+    <color name="col_Ncompleta">#ff212121</color>
+    <color name="col_fecha">#ff919191</color>
+    <color name="col_link">#ff2d9722</color>
 </resources>

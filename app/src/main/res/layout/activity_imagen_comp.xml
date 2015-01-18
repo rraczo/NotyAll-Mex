@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#000">
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="0dp"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="0dp"
-    android:background="#46000000">
-
-
-
-    <ImageView
+    <it.sephiroth.android.library.imagezoom.ImageViewTouch
         android:id="@+id/image_G"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scaleType="matrix"
-        android:layout_gravity="center" />
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"         />
 
-</RelativeLayout>
+</LinearLayout>
