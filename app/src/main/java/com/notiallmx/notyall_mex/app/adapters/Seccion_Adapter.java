@@ -18,7 +18,6 @@ import java.util.ArrayList;
  * Created by lord on 15/01/2015.
  */
 
-
 class ViewHolder {
     TextView categoria_nombre;
 }
