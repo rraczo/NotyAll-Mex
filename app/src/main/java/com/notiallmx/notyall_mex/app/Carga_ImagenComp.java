@@ -16,7 +16,6 @@ import android.widget.Toast;
 public class Carga_ImagenComp extends Activity {
     String _IMG = "";
     ImageViewTouch mImage;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +25,6 @@ public class Carga_ImagenComp extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_imagen_comp);
     }
-
     @Override
     public void onContentChanged() {
         super.onContentChanged();
@@ -39,7 +37,6 @@ public class Carga_ImagenComp extends Activity {
             Toast.makeText(this, "Failed to load the image", Toast.LENGTH_LONG).show();
         }
     }
-
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
