@@ -57,7 +57,7 @@ public class Seccion_Adapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             vi = inflater.inflate(R.layout.seccion_item, null);
             viewhold=new ViewHolder();
-            viewhold.categoria_nombre=(TextView) vi.findViewById(R.id.titulo);
+            viewhold.categoria_nombre=(TextView) vi.findViewById(R.id.item_titulo);
 
             Seccion sec = items.get(position);
 
