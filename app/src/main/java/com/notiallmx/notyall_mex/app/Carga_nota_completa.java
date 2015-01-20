@@ -127,7 +127,7 @@ public class Carga_nota_completa extends Activity {
                         @Override
                         public void onClick(View v) {
                             Log.i("Que shingaos click", "Entered onClick method");
-                            Intent intent = new Intent(Carga_nota_completa.this, ImageZoomActivity.class);
+                            Intent intent = new Intent(Carga_nota_completa.this, Carga_ImagenComp.class);
                             intent.putExtra("_IMG", listaNot.get(0).getFoto());
                             startActivity(intent);
                         }
@@ -147,10 +147,8 @@ public class Carga_nota_completa extends Activity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
     }
-
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
