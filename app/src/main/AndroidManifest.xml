@@ -40,6 +40,10 @@
             android:name=".Carga_nota_completa"
             android:label="@string/title_activity_carga_nota_completa" >
         </activity>
+        <activity
+            android:name=".ImageZoomActivity"
+            android:label="@string/title_activity_image_view_zoom" >
+        </activity>
     </application>
 
 </manifest>

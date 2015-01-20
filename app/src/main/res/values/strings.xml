@@ -22,6 +22,7 @@
     <string name="title_activity_carga_secciones">Carga_secciones</string>
     <string name="title_activity_carga_notas_seccion">Carga_notas_seccion</string>
     <string name="title_activity_carga_nota_completa">Carga_nota_completa</string>
+    <string name="title_activity_image_view_zoom">Carga_imagen_zoom</string>
 
     <color name="col_tit">#000</color>
     <color name="col_resumen">#ff404040</color>

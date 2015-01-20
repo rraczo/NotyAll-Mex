@@ -127,7 +127,7 @@ public class Carga_nota_completa extends Activity {
                         @Override
                         public void onClick(View v) {
                             Log.i("Que shingaos click", "Entered onClick method");
-                            Intent intent = new Intent(Carga_nota_completa.this, Carga_ImagenComp.class);
+                            Intent intent = new Intent(Carga_nota_completa.this, ImageZoomActivity.class);
                             intent.putExtra("_IMG", listaNot.get(0).getFoto());
                             startActivity(intent);
                         }
