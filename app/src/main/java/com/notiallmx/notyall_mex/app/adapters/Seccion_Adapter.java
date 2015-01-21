@@ -97,7 +97,7 @@ public class Seccion_Adapter extends BaseAdapter {
             viewhold.categoria_nombre.setText(sec.name);
             Drawable icono;
             String nameLowerCase=sec.name.toLowerCase();
-            icono=activity.getResources().getDrawable(R.drawable.inicio);
+            icono=activity.getResources().getDrawable(R.drawable.icono);
             if (academia.contains(nameLowerCase)) {
                 icono=activity.getResources().getDrawable(R.drawable.academia);
             }
