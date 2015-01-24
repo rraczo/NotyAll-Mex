@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.v4.app.NavUtils;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -21,10 +20,17 @@ import android.widget.ListView;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.notiallmx.notyall_mex.app.objects.item_Noticia;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +45,9 @@ public class Carga_nota_completa extends Activity {
     private ShareActionProvider mShareActionProvider;
     private ProgressDialog progressDialog;
     private ListView listnotas ;
+    DisplayImageOptions defaultOptions;
+    ImageLoaderConfiguration config;
+    ImageLoader imageLoader;
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
@@ -74,6 +83,19 @@ public class Carga_nota_completa extends Activity {
         new Cargar_nota_completa(this,"test").execute();
         //activar el boton atras en la actionbar
         getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        defaultOptions = new DisplayImageOptions.Builder()
+                .cacheOnDisc(true).cacheInMemory(true)
+                .imageScaleType(ImageScaleType.EXACTLY)
+                .displayer(new FadeInBitmapDisplayer(300)).build();
+
+        config = new ImageLoaderConfiguration.Builder(
+                Carga_nota_completa.this)
+                .defaultDisplayImageOptions(defaultOptions)
+                .memoryCache(new WeakMemoryCache())
+                .discCacheSize(100 * 1024 * 1024).build();
+        imageLoader = ImageLoader.getInstance();
+        imageLoader.init(config);
 
     }
 
@@ -121,7 +143,8 @@ public class Carga_nota_completa extends Activity {
                 linkC.setText(Html.fromHtml("<a href=" + _LINK + ">"+_LINK+"...</a>"));
                 linkC.setMovementMethod(LinkMovementMethod.getInstance());
                 if(listaNot.get(0).getFoto()!=null){
-                    imagenC.setImageDrawable(procesosjsoup.dameDrawabledeURL(listaNot.get(0).getFoto()));
+                    imageLoader.displayImage(listaNot.get(0).getFoto(), imagenC, defaultOptions);
+                    //imagenC.setImageDrawable(procesosjsoup.dameDrawabledeURL(listaNot.get(0).getFoto()));
                     Log.i("Intentamos poner imagen",listaNot.get(0).getFoto());
                     imagenC.setOnClickListener(new View.OnClickListener() {
                         @Override
