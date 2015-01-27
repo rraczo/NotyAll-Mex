@@ -55,7 +55,7 @@ public class Seccion_Adapter extends BaseAdapter {
     protected ArrayList<String> redpolitica=new ArrayList<String>(Arrays.asList("redpolitica","red politica","red política"));
     protected ArrayList<String> seguridad=new ArrayList<String>(Arrays.asList("seguridad","justicia","derecho"));
     protected ArrayList<String> sociedad=new ArrayList<String>(Arrays.asList("sociedad"));
-    protected ArrayList<String> tv=new ArrayList<String>(Arrays.asList("tv","television","cine","espectaculos","espectáculos","espectaculo","espectáculo"));
+    protected ArrayList<String> tv=new ArrayList<String>(Arrays.asList("tv","television","cine","espectaculos","espectáculos","espectaculo","espectáculo","funcion","función"));
 
 
     public Seccion_Adapter(Activity activity, ArrayList<Seccion> items) {
