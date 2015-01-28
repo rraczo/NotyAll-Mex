@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -272,19 +273,22 @@ public class procesosjsoup {
         List<item_Noticia> listaNot = new ArrayList<item_Noticia>();
         org.jsoup.nodes.Document doc;
         try {
-            InputStream is= new URL(link).openStream();
+            URLConnection urlConnection = new URL(link).openConnection();
+            urlConnection.addRequestProperty("User-Agent", "Mozilla/5.0");
+            InputStream is = urlConnection.getInputStream();
+
+            //InputStream is= new URL(link).openStream();
             Log.e("Abriendo stream de",link);
             doc = org.jsoup.Jsoup.parse(is , "utf-8", link);
             //org.jsoup.nodes.Document doc = Jsoup.connect(link).get();
+            Log.e("Todo HTML selector:",doc.html());
             try {
-                        Elements columna1 = doc.select(grammar.getString("selector_gramatica"));
-                        Log.i("Elements=", grammar.getString("selector_gramatica"));
-
+                Log.e("Elements=", grammar.getString("selector_gramatica"));
+                Elements columna1 = doc.select(grammar.getString("selector_gramatica"));
                         String titulo,fecha,resumen,link1;
-                        Log.i("Element Itera=",grammar.getString("elemento_gramatica"));
+                        Log.e("Element Itera=",grammar.getString("elemento_gramatica"));
                         int donitera=0;
                         for (Element itera : columna1.select(grammar.getString("elemento_gramatica"))) {
-
                             link1=itera.select(grammar.getString("link")).attr("href");
                             titulo=itera.select(grammar.getString("titulo")).text();
                             if(!grammar.getString("fecha").equals("")){
@@ -293,7 +297,6 @@ public class procesosjsoup {
                             else{
                                 fecha="";
                             }
-
                             if(!grammar.getString("descripcion").equals("")){
                                 resumen=itera.select(grammar.getString("descripcion")).text();
                                 if(resumen.length()>150){//si es muy larga ka descripcion la corpamos
