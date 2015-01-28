@@ -269,8 +269,6 @@ public class procesosjsoup {
         //esto era lo que te decia, con un servicio php se pide una cadena con todas las gramaticas en json y se recontruyen facil
         //y en lugar de ponerlas aqui separarlas en parametros desde que se escoge la seccion para cargar la url
 
-
-
         List<item_Noticia> listaNot = new ArrayList<item_Noticia>();
         org.jsoup.nodes.Document doc;
         try {
@@ -289,15 +287,21 @@ public class procesosjsoup {
 
                             link1=itera.select(grammar.getString("link")).attr("href");
                             titulo=itera.select(grammar.getString("titulo")).text();
-                            fecha=itera.select(grammar.getString("fecha")).text();
-                            if(fecha.equals("")&&titulo!=null&&titulo!=""&&titulo!=" ")
-                            {
-                                fecha="Hoy";
+                            if(!grammar.getString("fecha").equals("")){
+                                fecha=itera.select(grammar.getString("fecha")).text();
                             }
-                            resumen=itera.select(grammar.getString("descripcion")).text();
+                            else{
+                                fecha="";
+                            }
 
-                            if(resumen.length()>150){//si es muy larga ka descripcion la corpamos
-                                resumen=resumen.substring(0,150)+"...";
+                            if(!grammar.getString("descripcion").equals("")){
+                                resumen=itera.select(grammar.getString("descripcion")).text();
+                                if(resumen.length()>150){//si es muy larga ka descripcion la corpamos
+                                    resumen=resumen.substring(0,150)+"...";
+                                }
+                            }
+                            else {
+                                resumen="";
                             }
                             //solo agrega item si existe titulo y descripcion si no lo ignora y sigue con el siguiente elemento
                             if(titulo!=null&&titulo!=""&&titulo!=" "&&resumen!=""&&resumen!=null&&resumen!=" "){
@@ -310,9 +314,6 @@ public class procesosjsoup {
                         grammar.getString("fecha") + "\n" +
                         grammar.getString("descripcion")+"\n"+
                         grammar.getString("imagen_completa"));
-
-
-
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -341,14 +342,18 @@ public class procesosjsoup {
             doc = org.jsoup.Jsoup.parse(is , "utf-8", link);
             //sacamos selector de configuracion
             Elements columna1 = doc.select(grammar.getString("elemento_gramatica_completa"));
+            Log.e("elemento" ,columna1.toString());
             String titulo,fecha,resumen="",img;
             int donitera=0;
 
             titulo=columna1.select(grammar.getString("titulo_completa")).text();
+            Log.e("titulo" ,titulo);
             fecha=columna1.select(grammar.getString("fecha_completa")).text();
-
+            Log.e("fecha" ,fecha);
             resumen=columna1.select(grammar.getString("cuerpo")).html();
+            Log.e("resumen" ,resumen);
             img=columna1.select(grammar.getString("imagen_completa")).attr("src");
+            Log.e("imagen" ,img);
             if(img.length()==0){
                 listaNot.add(new item_Noticia(donitera, titulo,fecha,resumen,link));
             }else{

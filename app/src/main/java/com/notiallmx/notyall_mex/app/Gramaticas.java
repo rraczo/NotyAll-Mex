@@ -86,6 +86,7 @@ class Gramaticas extends AsyncTask<Void, Void, String> {
             aux= response.toString();
 
             if (aux != null) {
+                Log.i("dominio.php",aux);
                 Log.i("dominio.php","respondio correctamente \n ");
             } else {
                 Log.e("error","fallo el servicio dominio");
@@ -132,6 +133,7 @@ class Gramaticas extends AsyncTask<Void, Void, String> {
             aux= response.toString();
             if (aux != null) {
                 Log.i("seccion.php","respondio correctamente \n ");
+                Log.i("seccion.php",aux);
             } else {
                 Log.e("error","fallo el servicio seccion");
             }
@@ -159,6 +161,47 @@ class Gramaticas extends AsyncTask<Void, Void, String> {
         //post para obtener las gramaticas
         try {
             httpClient = new DefaultHttpClient();
+            httpPost = new HttpPost(prePag+"servicios/gramaticas.php");
+            nameValuePairs = new ArrayList<NameValuePair>(1);
+            nameValuePairs.add(new BasicNameValuePair("test", test));
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            responseHandler = new BasicResponseHandler();
+            response = httpClient.execute(httpPost, responseHandler);
+            aux= response.toString();
+
+            if (aux != null) {
+                Log.i("gramaticas.php","respondio correctamente \n ");
+                Log.i("seccion.php",aux);
+            } else {
+                Log.e("error","fallo el servicio gramaticas");
+            }
+
+            jsonObject = new JSONObject(aux);
+            JSONArray gramaticas = jsonObject.getJSONArray("notyall");
+
+            String gramaticas_cadena=gramaticas.toString();
+            SharedPreferences prefs = context.getSharedPreferences("ConfiguracionNotyAll",context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("Gramaticas", gramaticas_cadena);
+            editor.commit();
+            /*
+            for (int i = 0; i < gramaticas.length(); i++) {
+                JSONObject evobject = gramaticas.getJSONObject(i);
+                Gramatica gra = new Gramatica(evobject.getInt("id_gramatica"),evobject.getInt("id_categoria"),
+                        evobject.getString("selector_gramatica"),evobject.getString("elemento_gramatica"),
+                        evobject.getString("titulo"),evobject.getString("fecha"),evobject.getString("link"),
+                        evobject.getString("descripcion"));
+                GramaticasAvailable.add(gra);
+            }
+            */
+        } catch (Exception ex) {
+            error = true;
+            Log.e("error",ex.toString());
+            return "error";
+        }
+
+        try {
+            httpClient = new DefaultHttpClient();
             httpPost = new HttpPost(prePag+"servicios/gramatica.php");
             nameValuePairs = new ArrayList<NameValuePair>(1);
             nameValuePairs.add(new BasicNameValuePair("test", test));
@@ -169,6 +212,7 @@ class Gramaticas extends AsyncTask<Void, Void, String> {
 
             if (aux != null) {
                 Log.i("gramatica.php","respondio correctamente \n ");
+                Log.i("seccion.php",aux);
             } else {
                 Log.e("error","fallo el servicio gramatica");
             }

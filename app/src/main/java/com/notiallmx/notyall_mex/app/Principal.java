@@ -128,6 +128,7 @@ public class Principal extends Activity {
                 //en lugar de string lo maneamos como lista de Objetos 'Dominio' para poder pedirle la url, indice , etc..
                 availableDominios= new ArrayList<Dominio>();
                 //for que carga dominios en variable Dominios
+
                 for (int i = 0; i < DominiosArray.length(); i++) {
                     JSONObject evobject = DominiosArray.getJSONObject(i);
                     Dominio dom= new Dominio(evobject.getInt("id_sitio"),evobject.getString("url_sitio"),evobject.getString("nombre_sitio"));

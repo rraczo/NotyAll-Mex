@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -113,7 +112,9 @@ public class Carga_secciones extends Activity {
                     intent.putExtra("_INDICE", id_seccion);
                     intent.putExtra("_NOMBRE", name_seccion);
                     intent.putExtra("_LINK", link);
-
+                    Log.e("Indice de seccion", Integer.toString(id_seccion));
+                    Log.e("Nombre de seccion", name_seccion);
+                    Log.e("Link de seccion", link);
                     startActivity(intent);
                     Log.i("Iniciando actividad", "Iniciando actividad");
 

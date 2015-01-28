@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -114,7 +113,9 @@ public class Carga_notas_seccion extends Activity {
                     intent.putExtra("_LINK", listaNot.get(position).getLink());
                     intent.putExtra("_TITULO", listaNot.get(position).getTitulo());
                     intent.putExtra("_GRAMATIC", _GRAMATIC.toString());
-
+                    Log.e("Link de nota",listaNot.get(position).getLink());
+                    Log.e("Titulo de la nota", listaNot.get(position).getTitulo());
+                    Log.e("Gramatica de la nota", _GRAMATIC.toString());
                     startActivity(intent);
                 }
             });
