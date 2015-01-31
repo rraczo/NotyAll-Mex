@@ -5,10 +5,36 @@
     android:orientation="vertical"
     android:background="#000">
 
-    <it.sephiroth.android.library.imagezoom.ImageViewTouch
-        android:id="@+id/image_G"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"         />
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <it.sephiroth.android.library.imagezoom.ImageViewTouch
+            android:id="@+id/image_G"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"         />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutShareButton"
+        android:layout_weight="0"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:background="@color/col_Ncompleta"
+        android:layout_marginTop="-60dp">
+        <Button
+            android:id="@+id/shareImage"
+            android:textColor="@color/col_share"
+            android:background="@color/col_Ncompleta"
+            android:textSize="18dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/shareImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp" />
+    </LinearLayout>
 
 </LinearLayout>

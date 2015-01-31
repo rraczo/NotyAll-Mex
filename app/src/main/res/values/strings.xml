@@ -13,6 +13,7 @@
     <string name="textoresumen">Esto es un ejemplo de resumen de la nota, Esto es un ejemplo de resumen de la nota,Esto es un ejemplo de resumen de la nota,Esto es un ejemplo de resumen de la nota</string>
     <string name="link">www.paginadeprueba.com</string>
     <string name="share">Compartir</string>
+    <string name="shareImage">Compartir Imágen</string>
     <string name="title_activity_list_item_image">List_item_image</string>
     <string name="title_activity_excelsior">Excelsior</string>
     <string name="title_activity_excelsior_not_rel">Excelsior NotRel</string>
@@ -29,7 +30,7 @@
     <color name="col_Ncompleta">#ff212121</color>
     <color name="col_fecha">#ff919191</color>
     <color name="col_link">#ff2d9722</color>
-
+    <color name="col_share">#FFF</color>
     <color name="titlebackgroundcolor">#ff5c9bcd</color>
     <color name="titletextcolor">#ffe6e6e6</color>
 </resources>
