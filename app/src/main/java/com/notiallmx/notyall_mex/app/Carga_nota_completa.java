@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -15,8 +16,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
@@ -24,8 +28,10 @@ import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.notiallmx.notyall_mex.app.objects.item_Noticia;
 
 import org.json.JSONException;
@@ -54,7 +60,6 @@ public class Carga_nota_completa extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carga_nota_completa);
-
 
         Bundle bundle = getIntent().getExtras();//sacamos variables
         _LINK=bundle.getString("_LINK");//sacamos variables
@@ -129,12 +134,11 @@ public class Carga_nota_completa extends Activity {
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            progressDialog.dismiss();
             TextView tituloC = (TextView)findViewById(R.id.tituloNotaC);
             TextView fechaC = (TextView)findViewById(R.id.fecha_NotaC);
             TextView resumenC = (TextView)findViewById(R.id.resumenNotaC);
             TextView linkC = (TextView)findViewById(R.id.linkNotaC);
-            ImageView imagenC = (ImageView)findViewById(R.id.imagenArti_NotaC);
+            final ImageView imagenC = (ImageView)findViewById(R.id.imagenArti_NotaC);
             Drawable tempimg = null;
             try {
                 tituloC.setText(listaNot.get(0).getTitulo());
@@ -143,7 +147,18 @@ public class Carga_nota_completa extends Activity {
                 linkC.setText(Html.fromHtml("<a href=" + _LINK + ">"+_LINK+"...</a>"));
                 linkC.setMovementMethod(LinkMovementMethod.getInstance());
                 if(listaNot.get(0).getFoto()!=null){
-                    imageLoader.displayImage(listaNot.get(0).getFoto(), imagenC, defaultOptions);
+                    imageLoader.displayImage(listaNot.get(0).getFoto(), imagenC, defaultOptions, new SimpleImageLoadingListener() {
+                        @Override
+                        public void onLoadingStarted(String imageUri, View view) {
+
+                        }
+                        @Override
+                        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                            progressDialog.dismiss();
+
+                        }
+                    });
+
                     //imagenC.setImageDrawable(procesosjsoup.dameDrawabledeURL(listaNot.get(0).getFoto()));
                     Log.i("Intentamos poner imagen",listaNot.get(0).getFoto());
                     imagenC.setOnClickListener(new View.OnClickListener() {
@@ -158,6 +173,8 @@ public class Carga_nota_completa extends Activity {
                     //tempimg = procesosjsoup.dameDrawabledeURL(listaNot.get(0).getFoto());
                     resumenC.setCompoundDrawablesWithIntrinsicBounds( null, tempimg, null, null );
                     resumenC.setText(Html.fromHtml(listaNot.get(0).getResumen()));
+
+
                     /** Setting a share intent */
                     share_titulo=(listaNot.get(0).getTitulo());
                     share_todo=(listaNot.get(0).getTitulo()+"\n\n"+
@@ -170,8 +187,12 @@ public class Carga_nota_completa extends Activity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
         }
+
     }
+
+
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
