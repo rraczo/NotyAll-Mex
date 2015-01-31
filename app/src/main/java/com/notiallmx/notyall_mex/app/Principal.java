@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -152,6 +153,8 @@ public class Principal extends Activity {
                         intent.putExtra("_INDICE", id_seccion);
                         intent.putExtra("_NOMBRE", name_seccion);
                         startActivity(intent);
+                        Log.i("indice de seccion", id_seccion+" ");
+                        Log.i("indice de seccion", name_seccion+" ");
                         Log.i("Iniciando actividad", "Iniciando actividad");
                     }
                 });

@@ -29,4 +29,7 @@
     <color name="col_Ncompleta">#ff212121</color>
     <color name="col_fecha">#ff919191</color>
     <color name="col_link">#ff2d9722</color>
+
+    <color name="titlebackgroundcolor">#ff5c9bcd</color>
+    <color name="titletextcolor">#ffe6e6e6</color>
 </resources>

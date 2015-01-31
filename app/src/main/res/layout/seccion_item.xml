@@ -4,12 +4,34 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <ImageView android:id="@+id/item_image"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:background="@drawable/ic_launcher"
-        android:scaleType="fitXY"
-        android:layout_marginRight="10dp"/>
+    <RelativeLayout
+
+        android:id="@+id/icon_layout"
+        android:layout_width="@dimen/icon_mask"
+        android:layout_height="@dimen/icon_mask"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+
+        <ImageView
+            android:id="@+id/item_image"
+            android:layout_width="@dimen/icon"
+            android:layout_height="@dimen/icon"
+            android:layout_centerInParent="true"
+            android:scaleType="fitXY" >
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/icon_mask"
+            android:layout_width="@dimen/icon_mask"
+            android:layout_height="@dimen/icon_mask"
+            android:layout_centerInParent="true"
+            android:background="@drawable/circle"
+            android:scaleType="fitXY" >
+        </ImageView>
+    </RelativeLayout>
+
+
+
 
     <TextView android:id="@+id/item_titulo"
         android:layout_height="fill_parent"

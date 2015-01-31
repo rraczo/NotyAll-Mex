@@ -2,12 +2,21 @@ package com.notiallmx.notyall_mex.app;
 
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by oscar on 06/06/2014.
@@ -29,16 +38,42 @@ public class Carga_ImagenComp extends Activity {
     public void onContentChanged() {
         super.onContentChanged();
         mImage = (ImageViewTouch) findViewById(R.id.image_G);
-        Bitmap bitmap = procesosjsoup.dameBitmapdeURL(_IMG);
+        final Bitmap bitmap = procesosjsoup.dameBitmapdeURL(_IMG);
         if (null != bitmap) {
             mImage.setImageBitmap(bitmap, null, - 1, 8f);
         }
         else {
             Toast.makeText(this, "Failed to load the image", Toast.LENGTH_LONG).show();
         }
+        mImage.setSingleTapListener(
+                new ImageViewTouch.OnImageViewTouchSingleTapListener() {
+
+                    @Override
+                    public void onSingleTapConfirmed() {
+                        Log.e("single touch", "onSingleTapConfirmed");
+
+                        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                        sharingIntent.setType("image/jpeg");
+                        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                        File f = new File(Environment.getExternalStorageDirectory() + File.separator + "NotyAll-ImageShare.jpg");
+                        try {
+                            f.createNewFile();
+                            FileOutputStream fo = new FileOutputStream(f);
+                            fo.write(bytes.toByteArray());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///sdcard/NotyAll-ImageShar.jpg"));
+                        startActivity(Intent.createChooser(sharingIntent, "Share Image"));
+                        //startActivity(sharingIntent);
+                    }
+                }
+        );
     }
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
     }
+
 }
