@@ -2,20 +2,32 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_padding_left"
-    android:paddingRight="@dimen/activity_padding_right"
         tools:context="com.notiallmx.notyall_mex.app.Carga_nota_completa">
+
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="-6dp"
+            android:indeterminate="true"
+            />
 
 
         <TextView
             android:id="@+id/tituloNotaC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="3dip"
+
             android:text="@string/titulo"
             android:textColor="@color/col_tit"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            android:paddingLeft="@dimen/activity_padding_left"
+            android:paddingRight="@dimen/activity_padding_right"/>
 
 
         <ScrollView
@@ -24,7 +36,9 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/tituloNotaC"
             android:layout_below="@+id/tituloNotaC"
-            android:paddingBottom="30dip" >
+            android:paddingBottom="30dip"
+            android:paddingLeft="@dimen/activity_padding_left"
+            android:paddingRight="@dimen/activity_padding_right">
 
             <LinearLayout
                 android:layout_width="fill_parent"

@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
@@ -54,13 +55,15 @@ public class Carga_nota_completa extends Activity {
     DisplayImageOptions defaultOptions;
     ImageLoaderConfiguration config;
     ImageLoader imageLoader;
+    private ProgressBar progressBar;
+    private int progressStatus = 0;
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carga_nota_completa);
-
+        progressBar = (ProgressBar) findViewById(R.id.progressBar1);
         Bundle bundle = getIntent().getExtras();//sacamos variables
         _LINK=bundle.getString("_LINK");//sacamos variables
         _TITULO=bundle.getString("_TITULO");//sacamos variables
@@ -89,6 +92,7 @@ public class Carga_nota_completa extends Activity {
         //activar el boton atras en la actionbar
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
+
         defaultOptions = new DisplayImageOptions.Builder()
                 .cacheOnDisc(true).cacheInMemory(true)
                 .imageScaleType(ImageScaleType.EXACTLY)
@@ -114,10 +118,11 @@ public class Carga_nota_completa extends Activity {
         protected void onPreExecute() {
             // TODO Auto-generated method stub
             super.onPreExecute();
-            progressDialog = new ProgressDialog(context);
-            progressDialog.setMessage("Cargando, espere por favor...");
-            progressDialog.setIndeterminate(true);
-            progressDialog.show();
+            progressBar.setVisibility(View.VISIBLE);
+//            progressDialog = new ProgressDialog(context);
+//            progressDialog.setMessage("Cargando, espere por favor...");
+//            progressDialog.setIndeterminate(true);
+//            progressDialog.show();
             //aqui el pedo
         }
 
@@ -154,7 +159,8 @@ public class Carga_nota_completa extends Activity {
                         }
                         @Override
                         public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                            progressDialog.dismiss();
+                            //progressDialog.dismiss();
+                            progressBar.setVisibility(View.INVISIBLE);
 
                         }
                     });
