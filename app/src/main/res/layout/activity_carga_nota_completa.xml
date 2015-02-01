@@ -7,13 +7,16 @@
 
         <ProgressBar
             android:id="@+id/progressBar1"
-            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:max="100"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="-6dp"
+            android:layout_marginTop="-13dp"
             android:indeterminate="true"
+            android:secondaryProgress="0"
+            android:progress="0"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:indeterminateDrawable="@drawable/progressba"
             />
 
 

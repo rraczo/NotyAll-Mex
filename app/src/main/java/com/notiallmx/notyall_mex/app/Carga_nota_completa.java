@@ -32,6 +32,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.notiallmx.notyall_mex.app.objects.item_Noticia;
 
@@ -161,6 +162,10 @@ public class Carga_nota_completa extends Activity {
                         public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
                             //progressDialog.dismiss();
                             progressBar.setVisibility(View.INVISIBLE);
+
+                        }}, new ImageLoadingProgressListener() {
+                        @Override
+                        public void onProgressUpdate(String imageUri, View view, int current, int total) {
 
                         }
                     });
