@@ -6,9 +6,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -39,6 +41,11 @@ import com.notiallmx.notyall_mex.app.objects.item_Noticia;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +65,7 @@ public class Carga_nota_completa extends Activity {
     ImageLoader imageLoader;
     private ProgressBar progressBar;
     private int progressStatus = 0;
+    private String _IMGURI;
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
@@ -162,6 +170,7 @@ public class Carga_nota_completa extends Activity {
                         public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
                             //progressDialog.dismiss();
                             progressBar.setVisibility(View.INVISIBLE);
+                            _IMGURI=guardaimagen(loadedImage);
 
                         }}, new ImageLoadingProgressListener() {
                         @Override
@@ -178,6 +187,7 @@ public class Carga_nota_completa extends Activity {
                             Log.i("Que shingaos click", "Entered onClick method");
                             Intent intent = new Intent(Carga_nota_completa.this, Carga_ImagenComp.class);
                             intent.putExtra("_IMG", listaNot.get(0).getFoto());
+                            intent.putExtra("_IMGURI", _IMGURI.toString());
                             startActivity(intent);
                         }
                     });
@@ -202,7 +212,26 @@ public class Carga_nota_completa extends Activity {
         }
 
     }
+public String guardaimagen(Bitmap bitmap){
+    File pictureStorage = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+    File noMedia = new File(pictureStorage, ".nomedia");
+    if (!noMedia.exists())
+        noMedia.mkdirs();
 
+    File file = new File(noMedia, "Notyall-notaTemp.png");
+
+    try {
+        FileOutputStream fOut = new FileOutputStream(file);
+        bitmap.compress(Bitmap.CompressFormat.PNG,100,fOut);
+        fOut.flush();
+        fOut.close();
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return file.getAbsolutePath();
+}
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override

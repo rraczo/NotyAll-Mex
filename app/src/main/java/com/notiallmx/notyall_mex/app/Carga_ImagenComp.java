@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URI;
 
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
 
@@ -37,11 +38,15 @@ public class Carga_ImagenComp extends Activity {
     Boolean visible;
     LinearLayout layoutShare;
     Button shareImageButton;
+    String _IMGURI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getIntent().getExtras();//sacamos variables
         _IMG = bundle.getString("_IMG");//sacamos variables
+        _IMGURI = bundle.getString("_IMGURI");//sacamos variables
+        Log.e("pasa entre actividades",_IMG);
+        Log.e("pasa entre actividades",_IMGURI);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_imagen_comp);
@@ -50,7 +55,8 @@ public class Carga_ImagenComp extends Activity {
     public void onContentChanged() {
         super.onContentChanged();
         mImage = (ImageViewTouch) findViewById(R.id.image_G);
-        final Bitmap bitmap = procesosjsoup.dameBitmapdeURL(_IMG);
+        //final Bitmap bitmap = procesosjsoup.dameBitmapdeURL(_IMG);
+        final Bitmap bitmap = BitmapFactory.decodeFile(_IMGURI);
 
         visible=false;
 
@@ -105,7 +111,7 @@ public class Carga_ImagenComp extends Activity {
 
                 try {
                     FileOutputStream fOut = new FileOutputStream(file);
-                    bitmap.compress(Bitmap.CompressFormat.PNG,93,fOut);
+                    bitmap.compress(Bitmap.CompressFormat.PNG,90,fOut);
                     fOut.flush();
                     fOut.close();
                 } catch (FileNotFoundException e) {
