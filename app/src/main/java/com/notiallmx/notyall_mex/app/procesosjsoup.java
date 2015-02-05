@@ -343,6 +343,7 @@ public class procesosjsoup {
             InputStream is= new URL(link).openStream();
             Log.i("stream",link);
             doc = org.jsoup.Jsoup.parse(is , "utf-8", link);
+            doc.select("script, jscript").remove();
             //sacamos selector de configuracion
             Elements columna1 = doc.select(grammar.getString("elemento_gramatica_completa"));
             Log.e("elemento" ,columna1.toString());
@@ -353,15 +354,21 @@ public class procesosjsoup {
             Log.e("titulo" ,titulo);
             fecha=columna1.select(grammar.getString("fecha_completa")).text();
             Log.e("fecha" ,fecha);
-            resumen=columna1.select(grammar.getString("cuerpo")).html();
+            resumen=columna1.select(grammar.getString("cuerpo")).html().replace("<img","<div").replace("</img","</div");
             Log.e("resumen" ,resumen);
-            img=columna1.select(grammar.getString("imagen_completa")).attr("src");
+            img="";
+            //img=columna1.select(grammar.getString("imagen_completa")).attr("src");
+            for (Element i:columna1.select(grammar.getString("imagen_completa"))){
+                Log.e("Varias imagenes",i.attr("src"));
+                img+=i.attr("src")+",";
+
+            }
             Log.e("imagen" ,img);
             if(img.length()==0){
                 listaNot.add(new item_Noticia(donitera, titulo,fecha,resumen,link));
             }else{
             Log.i("agregamos img a lista",img.toString());
-            listaNot.add(new item_Noticia(donitera, titulo,fecha,resumen,link,img));
+            listaNot.add(new item_Noticia(donitera,titulo,fecha,resumen,link,img));
             Log.i("agregamos en lista not","iniciadndo");
             }
 

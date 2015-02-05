@@ -6,22 +6,19 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.ShareActionProvider;
@@ -31,12 +28,11 @@ import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import com.notiallmx.notyall_mex.app.adapters.ViewPagerAdapter;
 import com.notiallmx.notyall_mex.app.objects.item_Noticia;
+import com.viewpagerindicator.CirclePageIndicator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,12 +41,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Carga_nota_completa extends Activity {
+public class Carga_nota_completa extends android.support.v4.app.FragmentActivity {
     List<item_Noticia> listaNot = new ArrayList<item_Noticia>();
     String _LINK="";
     String _TITULO="";
@@ -66,6 +61,12 @@ public class Carga_nota_completa extends Activity {
     private ProgressBar progressBar;
     private int progressStatus = 0;
     private String _IMGURI;
+
+    private ViewPager viewPager;
+    private LinearLayout mainLayout;
+    private View cell;
+    private String images[];
+    private int h,w;
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
@@ -115,6 +116,7 @@ public class Carga_nota_completa extends Activity {
         imageLoader = ImageLoader.getInstance();
         imageLoader.init(config);
 
+
     }
 
     class Cargar_nota_completa extends AsyncTask<Void, Void, String> {
@@ -152,16 +154,49 @@ public class Carga_nota_completa extends Activity {
             TextView fechaC = (TextView)findViewById(R.id.fecha_NotaC);
             TextView resumenC = (TextView)findViewById(R.id.resumenNotaC);
             TextView linkC = (TextView)findViewById(R.id.linkNotaC);
-            final ImageView imagenC = (ImageView)findViewById(R.id.imagenArti_NotaC);
+            //final ImageView imagenC = (ImageView)findViewById(R.id.imagenArti_NotaC);
             Drawable tempimg = null;
+
+
             try {
                 tituloC.setText(listaNot.get(0).getTitulo());
                 fechaC.setText(listaNot.get(0).getFecha());
                 //linkC.setText(_LINK);
                 linkC.setText(Html.fromHtml("<a href=" + _LINK + ">"+_LINK+"...</a>"));
                 linkC.setMovementMethod(LinkMovementMethod.getInstance());
+
+
+               /** Intento con el archivo Gallery Page Adapter**/
+                /*viewPager = (ViewPager) findViewById(R.id._viewPager);
+                mainLayout = (LinearLayout) findViewById(R.id._linearLayout);
+                images = listaNot.get(0).getFoto().split(",");
+
+                for (int j = 0; j < images.length; j++) {
+                    Log.e("url de imagen para pager",images[j]);
+                    cell = getLayoutInflater().inflate(R.layout.cell, null);
+                    final ImageView imageView = (ImageView) cell.findViewById(R.id._image);
+                    viewPager.setVisibility(View.VISIBLE);
+                    viewPager.setAdapter(new GalleryPageAdapter(Carga_nota_completa.this, images, w, h));
+                    imageView.setId(j);
+                    mainLayout.addView(cell);
+                }
+                viewPager.setCurrentItem(0);
+                viewPager.setVisibility(View.VISIBLE);
+                */
+                /** Intento con el archivo View Page Adapter**/
+                images = listaNot.get(0).getFoto().split(",");
+                viewPager = (ViewPager) findViewById(R.id.pager);
+                // Pass results to ViewPagerAdapter Class
+                ViewPagerAdapter adapter = new ViewPagerAdapter(Carga_nota_completa.this,images);
+                // Binds the Adapter to the ViewPager
+                viewPager.setAdapter(adapter);
+
+                CirclePageIndicator indicador = (CirclePageIndicator) findViewById(R.id.indicator);
+                indicador.setViewPager(viewPager);
+
                 if(listaNot.get(0).getFoto()!=null){
-                    imageLoader.displayImage(listaNot.get(0).getFoto(), imagenC, defaultOptions, new SimpleImageLoadingListener() {
+
+                    /*imageLoader.displayImage(listaNot.get(0).getFoto(), imagenC, defaultOptions, new SimpleImageLoadingListener() {
                         @Override
                         public void onLoadingStarted(String imageUri, View view) {
 
@@ -191,9 +226,11 @@ public class Carga_nota_completa extends Activity {
                             startActivity(intent);
                         }
                     });
+                    */
                     //tempimg = procesosjsoup.dameDrawabledeURL(listaNot.get(0).getFoto());
-                    resumenC.setCompoundDrawablesWithIntrinsicBounds( null, tempimg, null, null );
+                    //resumenC.setCompoundDrawablesWithIntrinsicBounds( null, tempimg, null, null );
                     resumenC.setText(Html.fromHtml(listaNot.get(0).getResumen()));
+
 
 
                     /** Setting a share intent */
@@ -204,6 +241,7 @@ public class Carga_nota_completa extends Activity {
                             _LINK);
                     //poner en la barra la parte de compartir de api 14 para adelante
                     mShareActionProvider.setShareIntent(getDefaultShareIntent());
+
                 }
             } catch (Exception e) {
                 e.printStackTrace();
